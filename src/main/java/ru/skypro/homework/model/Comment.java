@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Getter
 @Setter
@@ -16,5 +18,12 @@ public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    private Integer count;
+    private Integer authorId;
+    private String imagePath;
+    private String authorFirstName;
+    private LocalDateTime dateTime;
+    private String text;
 
 }

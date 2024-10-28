@@ -20,4 +20,10 @@ public class Advertisement {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private Integer authorId;
+    private String imagePath;
+    private Integer price;
+    private String title;
+    private String description;
+
 }
