@@ -1,25 +1,18 @@
-package ru.skypro.homework.model;
-
-import javax.persistence.*;
+package ru.skypro.homework.dto.advertisement;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Advertisement {
+public class AdvertisementDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long author;
-
-    @OneToOne(mappedBy = "user")
-    private Image image;
+    private byte[] image;
     private String pk;
     private Integer price;
     private String title;

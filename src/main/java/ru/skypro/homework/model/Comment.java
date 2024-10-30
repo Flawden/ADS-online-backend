@@ -20,7 +20,7 @@ public class Comment {
     private Long id;
 
     private Integer count;
-    private Integer authorId;
+    private Integer author;
     private String imagePath;
     private String authorFirstName;
     private LocalDateTime dateTime;
