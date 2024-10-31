@@ -19,11 +19,11 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Integer count;
     private Integer author;
-    private String imagePath;
+    private String authorImage;
     private String authorFirstName;
-    private LocalDateTime dateTime;
+    private LocalDateTime createdAt;
+    private Integer pk;
     private String text;
 
 }

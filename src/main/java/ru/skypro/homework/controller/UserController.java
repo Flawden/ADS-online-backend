@@ -3,17 +3,16 @@ package ru.skypro.homework.controller;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import ru.skypro.homework.dto.PasswordUpdateDTO;
-import ru.skypro.homework.dto.Role;
+import ru.skypro.homework.dto.NewPassword;
 import ru.skypro.homework.dto.UserDTO;
-import ru.skypro.homework.dto.UserUpdaterDTO;
+import ru.skypro.homework.dto.UpdateUser;
 
 @RestController
 @RequestMapping("/users")
 public class UserController {
 
     @PostMapping("/set_password")
-    public ResponseEntity<String> reNewPassword(@RequestBody PasswordUpdateDTO passwordUpdateDTO) {
+    public ResponseEntity<String> reNewPassword(@RequestBody NewPassword newPassword) {
 
         return ResponseEntity.ok("Пароль успешно обновлен");
     }
@@ -21,12 +20,12 @@ public class UserController {
     @GetMapping("/me")
     public UserDTO getAuthUser() {
 
-        return new UserDTO(0L, "test@mail.ru", "firstname", "lastname", "89000000000", "USER", new byte[]{1, 2, 3});
+        return new UserDTO(0L, "test@mail.ru", "firstname", "lastname", "89000000000", "USER", "https://photo.com");
     }
 
 
     @PatchMapping("/me")
-    public ResponseEntity<String> updateAuthUser(@RequestBody UserUpdaterDTO userUpdaterDTO) {
+    public ResponseEntity<String> updateAuthUser(@RequestBody UpdateUser updateUser) {
 
         return ResponseEntity.ok("Данные были успешно обновлены");
     }

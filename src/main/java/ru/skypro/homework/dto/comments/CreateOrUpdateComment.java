@@ -5,19 +5,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.criteria.CriteriaBuilder;
-
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CommentDTO {
+public class CreateOrUpdateComment {
 
-    private Long author;
-    private String authorImage;
-    private String authorFirstName;
-    private Long createdAtALong;
-    private Integer pk;
     private String text;
 
 }

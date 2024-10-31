@@ -12,6 +12,7 @@ import javax.persistence.*;
 @EqualsAndHashCode
 @ToString
 @Entity
+@Table(name = "app_user")
 public class User {
 
     @Id
@@ -24,7 +25,5 @@ public class User {
     private String lastName;
     private String phone;
     private Role role;
-
-    @OneToOne(mappedBy = "user")
-    private Image image;
+    private String image;
 }

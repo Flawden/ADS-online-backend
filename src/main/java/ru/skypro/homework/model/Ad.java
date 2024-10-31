@@ -12,15 +12,13 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Advertisement {
+public class Ad {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long author;
-
-    @OneToOne(mappedBy = "user")
-    private Image image;
-    private String pk;
+    private String image;
+    private Integer pk;
     private Integer price;
     private String title;
 

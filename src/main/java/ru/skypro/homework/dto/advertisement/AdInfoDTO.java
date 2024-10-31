@@ -9,12 +9,16 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class AdvertisementDTO {
+public class AdInfoDTO {
 
-    private Long author;
+    private Integer pk;
+    private String authorFirstName;
+    private String authorLastName;
+    private String stringdescription;
+    private String emailString;
     private byte[] image;
-    private String pk;
-    private Integer price;
+    private String phone;
+    private Double price;
     private String title;
 
 }

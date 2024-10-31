@@ -1,18 +1,19 @@
-package ru.skypro.homework.dto;
+package ru.skypro.homework.dto.advertisement;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserUpdaterDTO {
+public class Ads {
 
-    private String firstName;
-    private String lastName;
-    private String phone;
+    private int count;
+    private List<AdDTO> results;
 
 }

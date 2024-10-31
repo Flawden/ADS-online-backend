@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class AdvertisementUpdateDTO {
+public class CreateOrUpdateAd {
 
     private String title;
     private Double price;

@@ -1,4 +1,4 @@
-package ru.skypro.homework.dto.advertisement;
+package ru.skypro.homework.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,18 +7,18 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
-public class AdvertisementInfoDTO {
-
+@NoArgsConstructor
+public class ExtendedAd {
+    
     private Integer pk;
     private String authorFirstName;
     private String authorLastName;
-    private String stringdescription;
-    private String emailString;
-    private byte[] image;
+    private String description;
+    private String email;
+    private String image;
     private String phone;
-    private Double price;
+    private String price;
     private String title;
-
+    
 }

@@ -3,12 +3,13 @@ package ru.skypro.homework.controller;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import ru.skypro.homework.dto.advertisement.AdvertisementDTO;
-import ru.skypro.homework.dto.advertisement.AdvertisementInfoDTO;
-import ru.skypro.homework.dto.advertisement.AdvertisementUpdateDTO;
-import ru.skypro.homework.dto.advertisement.AdvertisementsDTO;
+import ru.skypro.homework.dto.advertisement.AdDTO;
+import ru.skypro.homework.dto.advertisement.AdInfoDTO;
+import ru.skypro.homework.dto.advertisement.CreateOrUpdateAd;
+import ru.skypro.homework.dto.advertisement.Ads;
 import ru.skypro.homework.dto.comments.CommentDTO;
 import ru.skypro.homework.dto.comments.CommentsDTO;
+import ru.skypro.homework.dto.comments.CreateOrUpdateComment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,10 +19,10 @@ import java.util.List;
 public class AdvController {
 
     @GetMapping
-    public AdvertisementsDTO getAllAdvertisements() {
-        List<AdvertisementDTO> advertisements = new ArrayList<>();
-        advertisements.add(new AdvertisementDTO(0L, new byte[]{1, 2, 3}, "PK", 10000, "TestTitle"));
-        return new AdvertisementsDTO(advertisements.size(), advertisements);
+    public Ads getAllAdvertisements() {
+        List<AdDTO> advertisements = new ArrayList<>();
+        advertisements.add(new AdDTO(0L, new byte[]{1, 2, 3}, "PK", 10000, "TestTitle"));
+        return new Ads(advertisements.size(), advertisements);
     }
 
     @PostMapping
@@ -31,9 +32,9 @@ public class AdvController {
     }
 
     @GetMapping("/{id}")
-    public AdvertisementInfoDTO getAdvertisementById(@PathVariable Long id) {
+    public AdInfoDTO getAdvertisementById(@PathVariable Long id) {
 
-        return new AdvertisementInfoDTO(1, "Иван", "Иванов", "Продам гараж", "ivan.ivanov@example.com", new byte[]{1,2,3}, "+79999999999", 15000.0d, "Новый гараж");
+        return new AdInfoDTO(1, "Иван", "Иванов", "Продам гараж", "ivan.ivanov@example.com", new byte[]{1,2,3}, "+79999999999", 15000.0d, "Новый гараж");
     }
 
     @DeleteMapping("/{id}")
@@ -43,16 +44,16 @@ public class AdvController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<String> updateAdvertisementById(@RequestBody AdvertisementUpdateDTO advertisementsDTO) {
+    public ResponseEntity<String> updateAdvertisementById(@RequestBody CreateOrUpdateAd advertisementsDTO) {
 
         return ResponseEntity.ok("Реклама успешно обновлена");
     }
 
     @GetMapping("/me")
-    public AdvertisementsDTO getAllAdvertisementsOfAuthUser() {
-        List<AdvertisementDTO> advertisements = new ArrayList<>();
-        advertisements.add(new AdvertisementDTO(0L, new byte[]{1, 2, 3}, "PK", 10000, "TestTitle"));
-        return new AdvertisementsDTO(advertisements.size(), advertisements);
+    public Ads getAllAdvertisementsOfAuthUser() {
+        List<AdDTO> advertisements = new ArrayList<>();
+        advertisements.add(new AdDTO(0L, new byte[]{1, 2, 3}, "PK", 10000, "TestTitle"));
+        return new Ads(advertisements.size(), advertisements);
     }
 
     @PatchMapping("/{id}/image")
@@ -64,7 +65,7 @@ public class AdvController {
     @GetMapping("/{id}/comments")
     public CommentsDTO getCommentsOfAdvertisement(@PathVariable Long id) {
         List<CommentDTO> commentDTOs = new ArrayList<>();
-        commentDTOs.add(new CommentDTO(0L, new byte[]{1, 2, 3}, "Валера", System.currentTimeMillis(), 101, "Текст комментария"));
+        commentDTOs.add(new CommentDTO(0L, "https://photo.com", "Валера", System.currentTimeMillis(), 101, "Текст комментария"));
         return new CommentsDTO(commentDTOs.size(), commentDTOs);
     }
 
@@ -81,7 +82,7 @@ public class AdvController {
     }
 
     @PatchMapping("/{addId}/comments/{commentId}")
-    public ResponseEntity<String> updateComment(@PathVariable Long addId, @PathVariable Long commentId, @RequestBody String text) {
+    public ResponseEntity<String> updateComment(@PathVariable Long addId, @PathVariable Long commentId, @RequestBody CreateOrUpdateComment text) {
 
         return ResponseEntity.ok("Комментарий к рекламе успешно обновлен");
     }

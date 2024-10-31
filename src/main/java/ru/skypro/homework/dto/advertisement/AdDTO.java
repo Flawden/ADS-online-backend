@@ -5,15 +5,16 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-public class AdvertisementsDTO {
+@AllArgsConstructor
+public class AdDTO {
 
-    private int count;
-    private List<AdvertisementDTO> results;
+    private Long author;
+    private byte[] image;
+    private String pk;
+    private Integer price;
+    private String title;
 
 }
