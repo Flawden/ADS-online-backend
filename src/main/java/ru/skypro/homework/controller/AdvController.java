@@ -1,81 +1,100 @@
 package ru.skypro.homework.controller;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.skypro.homework.dto.AdvertisementDTO;
-import ru.skypro.homework.dto.CommentDTO;
-import ru.skypro.homework.model.Advertisement;
+import org.springframework.web.multipart.MultipartFile;
+import ru.skypro.homework.dto.advertisement.Ad;
+import ru.skypro.homework.dto.advertisement.ExtendedAd;
+import ru.skypro.homework.dto.advertisement.CreateOrUpdateAd;
+import ru.skypro.homework.dto.advertisement.Ads;
+import ru.skypro.homework.dto.comments.Comment;
+import ru.skypro.homework.dto.comments.Comments;
+import ru.skypro.homework.dto.comments.CreateOrUpdateComment;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("/ads")
+@CrossOrigin(value = "http://localhost:3000")
 public class AdvController {
 
     @GetMapping
-    public List<Advertisement> getAllAdvertisements() {
-
-        return null;
+    public ResponseEntity<Ads> getAllAds() {
+        List<Ad> advertisements = new ArrayList<>();
+        advertisements.add(new Ad(0, "https://img.freepik.com/premium-photo/baker-rolling-out-pastry-dough-baking_1280275-397011.jpg", 10, 10000, "TestTitle"));
+        return new ResponseEntity<>(new Ads(advertisements.size(), advertisements), HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<String> addAdvertisements() {
+    public ResponseEntity<Ad> addAd(@RequestParam("image") MultipartFile image,
+                                                    @RequestPart("properties") CreateOrUpdateAd properties) {
 
-        return ResponseEntity.ok("Реклама успешно добавлена");
+        return new ResponseEntity<>(new Ad(0, "https://img.freepik.com/premium-photo/baker-rolling-out-pastry-dough-baking_1280275-397011.jpg", 10, 10000, "TestTitle"), HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
-    public Advertisement getAdvertisementById(@PathVariable Long id) {
+    public ResponseEntity<ExtendedAd> getAds(@PathVariable Long id) {
 
-        return null;
+        return new ResponseEntity<>(new ExtendedAd(1, "Firstname", "Lastname", "Description", "email@email.ru", "https://img.freepik.com/premium-photo/baker-rolling-out-pastry-dough-baking_1280275-397011.jpg", "88005353535", 10000, "TestTitle"), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteAdvertisementById(@PathVariable Long id) {
+    public ResponseEntity<String> removeAd(@PathVariable Integer id) {
 
-        return ResponseEntity.ok("Реклама успешно удалена");
+        return ResponseEntity.noContent().build();
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<String> deleteAdvertisementById(@RequestBody AdvertisementDTO advertisementDTO) {
+    public ResponseEntity<Ad> updateAds(@PathVariable Integer id, @RequestBody CreateOrUpdateAd createOrUpdateAd) {
 
-        return ResponseEntity.ok("Реклама успешно обновлена");
+        return new ResponseEntity<>(new Ad(0, "https://img.freepik.com/premium-photo/baker-rolling-out-pastry-dough-baking_1280275-397011.jpg", 10, 10000, "TestTitle"), HttpStatus.CREATED);
     }
 
     @GetMapping("/me")
-    public List<Advertisement> getAllAdvertisementsOfAuthUser() {
-
-        return null;
+    public ResponseEntity<Ads> getAdsMe() {
+        List<Ad> advertisements = new ArrayList<>();
+        advertisements.add(new Ad(0, "https://img.freepik.com/premium-photo/baker-rolling-out-pastry-dough-baking_1280275-397011.jpg", 10, 10000, "TestTitle"));
+        return new ResponseEntity<>(new Ads(advertisements.size(), advertisements), HttpStatus.OK);
     }
 
     @PatchMapping("/{id}/image")
-    public ResponseEntity<String> updateAdvertisementImage(@PathVariable Long id) {
+    public ResponseEntity<byte[]> updateImage(@PathVariable("id") Integer id,
+                                                           @RequestParam("image") MultipartFile image) throws IOException {
 
-        return ResponseEntity.ok("Аватарка рекламы успешно обновлена");
+        byte[] updatedImageContent = image.getBytes();
+        return ResponseEntity.ok().contentType(MediaType.APPLICATION_OCTET_STREAM).body(updatedImageContent);
     }
 
     @GetMapping("/{id}/comments")
-    public List<CommentDTO> getCommentsOfAdvertisement(@PathVariable Long id) {
-
-        return null;
+    public ResponseEntity<Comments> getComments(@PathVariable Long id) {
+        List<Comment> comments = new ArrayList<>();
+        comments.add(new Comment(0, "https://img.freepik.com/premium-photo/baker-rolling-out-pastry-dough-baking_1280275-397011.jpg", "Валера", 10000, 101, "Текст комментария"));
+        return new ResponseEntity<>(new Comments(comments.size(), comments), HttpStatus.OK);
     }
 
     @PostMapping("/{id}/comments")
-    public CommentDTO addCommentToAdvertisement(@PathVariable Long id) {
+    public ResponseEntity<Comment> addComment(@PathVariable Long id, @RequestBody CreateOrUpdateComment text) {
 
-        return null;
+        return new ResponseEntity<>(new Comment(1, "https://img.freepik.com/premium-photo/baker-rolling-out-pastry-dough-baking_1280275-397011.jpg", "Author", 1000, 1000, "Text"), HttpStatus.OK);
     }
 
-    @DeleteMapping("/{addId}/comments/{commentId}")
-    public CommentDTO deleteComment(@PathVariable Long addId, @PathVariable Long commentId) {
+    @DeleteMapping("/{adId}/comments/{commentId}")
+    public ResponseEntity<Void> deleteComment(@PathVariable("adId") Integer adId,
+                                              @PathVariable("commentId") Integer commentId) {
 
-        return null;
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PatchMapping("/{addId}/comments/{commentId}")
-    public CommentDTO updateComment(@PathVariable Long addId, @PathVariable Long commentId) {
+    @PatchMapping("/{adId}/comments/{commentId}")
+    public ResponseEntity<Comment> updateComment(@PathVariable("adId") Integer adId,
+                                                @PathVariable("commentId") Integer commentId,
+                                                @RequestBody CreateOrUpdateComment updatedComment) {
 
-        return null;
+        return ResponseEntity.ok().build();
     }
 
 }
