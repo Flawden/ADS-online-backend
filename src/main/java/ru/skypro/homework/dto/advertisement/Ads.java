@@ -14,6 +14,6 @@ import java.util.List;
 public class Ads {
 
     private int count;
-    private List<AdDTO> results;
+    private List<Ad> results;
 
 }

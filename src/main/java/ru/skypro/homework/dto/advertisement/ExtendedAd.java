@@ -9,11 +9,15 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class AdDTO {
+public class ExtendedAd {
 
-    private Long author;
-    private byte[] image;
-    private String pk;
+    private Integer pk;
+    private String authorFirstName;
+    private String authorLastName;
+    private String description;
+    private String email;
+    private String image;
+    private String phone;
     private Integer price;
     private String title;
 

@@ -12,7 +12,7 @@ import lombok.Setter;
 public class CreateOrUpdateAd {
 
     private String title;
-    private Double price;
+    private Integer price;
     private String description;
 
 }

@@ -11,9 +11,9 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CommentsDTO {
+public class Comments {
 
     private int count;
-    private List<CommentDTO> results;
+    private List<Comment> results;
 
 }
