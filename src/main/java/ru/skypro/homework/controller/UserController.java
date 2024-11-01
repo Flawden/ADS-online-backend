@@ -14,26 +14,26 @@ import ru.skypro.homework.dto.UpdateUser;
 public class UserController {
 
     @PostMapping("/set_password")
-    public ResponseEntity<HttpStatus> reNewPassword(@RequestBody NewPassword newPassword) {
+    public ResponseEntity<HttpStatus> setPassword(@RequestBody NewPassword newPassword) {
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/me")
-    public ResponseEntity<User> getAuthUser() {
+    public ResponseEntity<User> getUser() {
 
         return new ResponseEntity<>(new User(0, "test@mail.ru", "firstname", "lastname", "89000000000", "USER", "https://static-cse.canva.com/blob/847132/paulskorupskas7KLaxLbSXAunsplash2.jpg"), HttpStatus.OK);
     }
 
 
     @PatchMapping("/me")
-    public ResponseEntity<UpdateUser> updateAuthUser(@RequestBody UpdateUser updateUser) {
+    public ResponseEntity<UpdateUser> updateUser(@RequestBody UpdateUser updateUser) {
 
         return new ResponseEntity<>(new UpdateUser("firsname", "lastname", "88005353535"), HttpStatus.OK);
     }
 
     @PatchMapping("/me/image")
-    public ResponseEntity<String> updateAvatarOfAuthUser(@RequestParam MultipartFile image) {
+    public ResponseEntity<String> updateUserImage(@RequestParam MultipartFile image) {
 
         return ResponseEntity.ok("Аватар пользователя был успешно обновлен");
     }

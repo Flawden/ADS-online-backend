@@ -23,46 +23,46 @@ import java.util.List;
 public class AdvController {
 
     @GetMapping
-    public ResponseEntity<Ads> getAllAdvertisements() {
+    public ResponseEntity<Ads> getAllAds() {
         List<Ad> advertisements = new ArrayList<>();
         advertisements.add(new Ad(0, "https://img.freepik.com/premium-photo/baker-rolling-out-pastry-dough-baking_1280275-397011.jpg", 10, 10000, "TestTitle"));
         return new ResponseEntity<>(new Ads(advertisements.size(), advertisements), HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<Ad> addAdvertisements(@RequestParam("image") MultipartFile image,
+    public ResponseEntity<Ad> addAd(@RequestParam("image") MultipartFile image,
                                                     @RequestPart("properties") CreateOrUpdateAd properties) {
 
         return new ResponseEntity<>(new Ad(0, "https://img.freepik.com/premium-photo/baker-rolling-out-pastry-dough-baking_1280275-397011.jpg", 10, 10000, "TestTitle"), HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ExtendedAd> getAdvertisementById(@PathVariable Long id) {
+    public ResponseEntity<ExtendedAd> getAds(@PathVariable Long id) {
 
         return new ResponseEntity<>(new ExtendedAd(1, "Firstname", "Lastname", "Description", "email@email.ru", "https://img.freepik.com/premium-photo/baker-rolling-out-pastry-dough-baking_1280275-397011.jpg", "88005353535", 10000, "TestTitle"), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteAdvertisementById(@PathVariable Integer id) {
+    public ResponseEntity<String> removeAd(@PathVariable Integer id) {
 
         return ResponseEntity.noContent().build();
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<Ad> updateAdvertisementById(@PathVariable Integer id, @RequestBody CreateOrUpdateAd createOrUpdateAd) {
+    public ResponseEntity<Ad> updateAds(@PathVariable Integer id, @RequestBody CreateOrUpdateAd createOrUpdateAd) {
 
         return new ResponseEntity<>(new Ad(0, "https://img.freepik.com/premium-photo/baker-rolling-out-pastry-dough-baking_1280275-397011.jpg", 10, 10000, "TestTitle"), HttpStatus.CREATED);
     }
 
     @GetMapping("/me")
-    public ResponseEntity<Ads> getAllAdvertisementsOfAuthUser() {
+    public ResponseEntity<Ads> getAdsMe() {
         List<Ad> advertisements = new ArrayList<>();
         advertisements.add(new Ad(0, "https://img.freepik.com/premium-photo/baker-rolling-out-pastry-dough-baking_1280275-397011.jpg", 10, 10000, "TestTitle"));
         return new ResponseEntity<>(new Ads(advertisements.size(), advertisements), HttpStatus.OK);
     }
 
     @PatchMapping("/{id}/image")
-    public ResponseEntity<byte[]> updateAdvertisementImage(@PathVariable("id") Integer id,
+    public ResponseEntity<byte[]> updateImage(@PathVariable("id") Integer id,
                                                            @RequestParam("image") MultipartFile image) throws IOException {
 
         byte[] updatedImageContent = image.getBytes();
@@ -70,14 +70,14 @@ public class AdvController {
     }
 
     @GetMapping("/{id}/comments")
-    public ResponseEntity<Comments> getCommentsOfAdvertisement(@PathVariable Long id) {
+    public ResponseEntity<Comments> getComments(@PathVariable Long id) {
         List<Comment> comments = new ArrayList<>();
         comments.add(new Comment(0, "https://img.freepik.com/premium-photo/baker-rolling-out-pastry-dough-baking_1280275-397011.jpg", "Валера", 10000, 101, "Текст комментария"));
         return new ResponseEntity<>(new Comments(comments.size(), comments), HttpStatus.OK);
     }
 
     @PostMapping("/{id}/comments")
-    public ResponseEntity<Comment> addCommentToAdvertisement(@PathVariable Long id, @RequestBody CreateOrUpdateComment text) {
+    public ResponseEntity<Comment> addComment(@PathVariable Long id, @RequestBody CreateOrUpdateComment text) {
 
         return new ResponseEntity<>(new Comment(1, "https://img.freepik.com/premium-photo/baker-rolling-out-pastry-dough-baking_1280275-397011.jpg", "Author", 1000, 1000, "Text"), HttpStatus.OK);
     }
